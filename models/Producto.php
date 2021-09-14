@@ -19,29 +19,29 @@
             return $resultado=$sql->fetchAll();
         }
 
-        public function delete_producto($contac_id){
+        public function delete_producto($id){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="UPDATE admcontactos
                 SET
-                    contact_est=0,
+                    contact_estado=0,
                 WHERE
-                    contact_id = ?";
+                    contac_id = ?";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1,$contac_id);
+            $sql->bindValue(1,$id);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
 
-        public function insert_producto($prod_nom,$prod_apellido,$prod_puesto,$prod_pais){
+        public function insert_producto($contac_nombre,$contac_apellido,$contac_puesto_trabajo,$contact_pais_procedencia){
             $conectar= parent::conexion();
             parent::set_names();
             $sql="INSERT INTO admcontactos (contac_id, contac_nombre, contac_apellido, contac_puesto_trabajo, contact_pais_procedencia, contact_estado) VALUES (NULL, ?,?,?,?,1);";
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1,$prod_nom);
-            $sql->bindValue(2,$prod_apellido);
-            $sql->bindValue(3,$prod_puesto);
-            $sql->bindValue(4,$prod_pais);
+            $sql->bindValue(1,$contac_nombre);
+            $sql->bindValue(2,$contac_apellido);
+            $sql->bindValue(3,$contac_puesto_trabajo);
+            $sql->bindValue(4,$contact_pais_procedencia);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }

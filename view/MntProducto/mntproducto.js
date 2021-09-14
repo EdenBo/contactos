@@ -69,7 +69,7 @@ function guardaryeditar(e){
         success: function(datos){
 
             $('#producto_form')[0].reset();
-            $("#modalmantenimiento").modal('show');
+            $("#modalmantenimiento").modal('hide');
             $('#producto_data').DataTable().ajax.reload();
 
             swal.fire(
@@ -81,14 +81,14 @@ function guardaryeditar(e){
     });
 }
 
-function editar(prod_id){
-    console.log(prod_id);
+function editar(contac_id){
+    console.log(contac_id);
 }
 
-function eliminar(prod_id){
+function eliminar(contac_id){
     swal.fire({
         title: 'CRUD',
-        text: "Desea Eliminar el Registro?",
+        text: "¿Desea Eliminar el Registro?",
         icon: 'error',
         showCancelButton: true,
         confirmButtonText: 'Si',
@@ -97,10 +97,21 @@ function eliminar(prod_id){
     }).then((result) => {
         if (result.isConfirmed) {
 
-            $.post("../../controller/producto.php?op=eliminar",{prod_id:prod_id},function (data) {
+            /*$.post("../../controller/producto.php?op=eliminar",{"contac_id":contac_id},function (data) {
 
+            });*/
+
+            $.ajax({
+
+                url: "../../controller/producto.php?op=eliminar",
+                data: {
+                    id: contac_id
+                },
+                success: function () {
+                    //window.location.reload();
+                    console.log("realizado");
+                }
             });
-
             $('#producto_data').DataTable().ajax.reload();	
 
             swal.fire(
